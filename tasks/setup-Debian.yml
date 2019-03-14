@@ -14,6 +14,15 @@
   register: php_package_install
   notify: restart webserver
 
+
+- name: Install php-mcrypt for version < 7.2.
+  apt:
+    name: "php{{ php_default_version_debian }}-mcrypt"
+    state: "{{ php_packages_state }}"
+  when: {{ php_default_version_debian }} is version('7.2', '<')
+  notify: restart webserver
+
+
 - name: Delete APCu configuration file if this role will provide one.
   file:
     path: "{{ item }}/{{ php_apc_conf_filename }}"
