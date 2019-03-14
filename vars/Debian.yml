@@ -14,6 +14,8 @@ __php_packages:
   - php{{ php_default_version_debian }}-xml
   - php{{ php_default_version_debian }}-mbstring
   - php{{ php_default_version_debian }}-mysql
+  - php{{ php_default_version_debian }}-soap
+  - php{{ php_default_version_debian }}-intl
   - php{{ php_default_version_debian }}-zip
   - php-sqlite3
   - php-apcu
