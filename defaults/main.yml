@@ -4,7 +4,7 @@
 php_enablerepo: ""
 
 # Default PHP version to install on Debian-based OSes.
-php_default_version_debian: "7.0"
+php_default_version_debian: "7.1"
 
 # PHP package state; use 'present' to make sure it's installed, or 'latest' if
 # you want to upgrade or switch versions using a new repo.
@@ -18,7 +18,7 @@ php_enable_webserver: true
 
 # PHP-FPM configuration.
 php_enable_php_fpm: false
-php_fpm_listen: "127.0.0.1:9000"
+php_fpm_listen: "/var/run/php/php{{ php_default_version_debian }}-fpm.sock"
 php_fpm_listen_allowed_clients: "127.0.0.1"
 php_fpm_pm_max_children: 50
 php_fpm_pm_start_servers: 5
@@ -109,6 +109,7 @@ php_source_configure_command: >
   --enable-sysvsem
   --enable-sysvshm
   --enable-wddx
+  --enable-fpm
   --with-curl
   --with-mcrypt
   --with-iconv

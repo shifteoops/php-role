@@ -1,31 +1,4 @@
 ---
-- name: Ensure dependencies for building from source are installed (RedHat).
-  package:
-    name:
-      - autoconf
-      - automake
-      - libtool
-      - bison
-      - make
-      - curl-devel
-      - recode-devel
-      - aspell-devel
-      - libxml2-devel
-      - pkgconfig
-  #    - libmcrypt-devel
-      - t1lib-devel
-      - libXpm-devel
-      - libpng-devel
-      - libjpeg-turbo-devel
-      - bzip2-devel
-      - openssl-devel
-      - freetype-devel
-      - libicu-devel
-      - mariadb-devel
-      - gmp-devel
-    state: present
-  when: ansible_os_family == 'RedHat'
-
 - name: Update apt cache (Debian).
   apt: update_cache=yes cache_valid_time=86400
   when: ansible_os_family == 'Debian'
@@ -55,6 +28,12 @@
       - libssl-dev
     state: present
   when: ansible_os_family == 'Debian'
+
+- name: Create symbolic link for libcurl
+  file:
+    src: "/usr/include/x86_64-linux-gnu/curl"
+    dest: "/usr/include/curl"
+    state: link
 
 - name: Define php_fpm_daemon (if not defined already).
   set_fact:
@@ -104,7 +83,7 @@
   command: >
     {{ php_source_configure_command }}
     chdir={{ php_source_clone_dir }}
-  when: php_installed.rc != 0
+  # when: php_installed.rc != 0
 
 - name: Make and install PHP.
   command: >

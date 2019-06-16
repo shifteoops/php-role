@@ -52,7 +52,9 @@
   when:
     - not php_install_from_source
     - ansible_os_family == 'Debian'
-
+    
+- include_tasks: install-from-source.yml
+  when: php_install_from_source
 
 # Configure PHP.
 - include_tasks: configure.yml
