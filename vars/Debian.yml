@@ -16,6 +16,7 @@ __php_packages:
   - php{{ php_default_version_debian }}-soap
   - php{{ php_default_version_debian }}-intl
   - php{{ php_default_version_debian }}-zip
+  - php{{ php_default_version_debian }}-bcmath
   - php-sqlite3
   - php-apcu
   - libapache2-mod-php{{ php_default_version_debian }}
